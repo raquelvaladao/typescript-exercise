@@ -1,25 +1,25 @@
 export {};
 
 
-// Criar uma função que retorne a quantidade de vogais da palavra passada.
+//Create a function that returns the number of vowels given a word
 function searchForVowelsInString(str: string) {
     const vowels: string[] = ['a','e','i','o','u']
-    let presentVowels: string[]
+    let presentVowels: string[] = []
 
     for (let i in vowels) {
         if(str.includes(vowels[i].toUpperCase()) || str.includes(vowels[i])) {
-            presentVowels.push(vowels[i])
+           presentVowels.push(vowels[i])
         }
     }
     return presentVowels   
 }
-//Dar um exemplo de uso com uma palavra recebida via parâmetro da função.
+//Give an example of usage with a word received via the function parameter. 
 console.log(searchForVowelsInString("ParalelepipedO"))
 
-//Dar um exemplo de uso com uma palavra recebida via input no formulário.
+//Give an example of usage with a word received via input in the form.
+//TODO
 
-
-//Dado o array:
+//given the array:
 type Object = {
     id: number, 
     name: string, 
@@ -33,31 +33,24 @@ var list: Array<Object> = Array(
     {"id" : 4, "name": "Nicolau Copérnico", "bio": "Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar."}
 );
 
-//crie uma função que retorne a bio do id passado
+//create a function that returns the bio given an id
 function searchForBioGivenId(givenId: number, people: Array<Object>){
-    for(let i in people) {
-        if(people[i].id == givenId) {
-            return people[i].bio
-        }
-    }
+    return people.filter(person => person.id === givenId)[0].bio     
 }
 
-//Crie uma função que retorne o name do id passado
+//create a function that returns the name given an id
 function searchForNameGivenId(givenId: number, people: Array<Object>){
-    for(let i in people) {
-        if(people[i].id == givenId) {
-            return people[i].name
-        }
-    }
+    return people.filter(person => person.id === givenId)[0].name
 }
 
-//Crie uma função que apague um item da lista a partir de um id passado
+//create a function that deletes item given an id
 function deleteItemGivenId(givenId: number, people: Array<Object>){
-    for(let i in people) {
-        if(people[i].id == givenId) {
-            const index = people.indexOf(people[i])
-            people.splice(index, 1)
-        }
-    }
+    let personToDelete = people.filter(person => person.id === givenId)[0]
+    const index = people.indexOf(personToDelete)
+    people.splice(index, 1)    
 }
 
+console.log(searchForBioGivenId(2, list))
+console.log(searchForNameGivenId(2, list))
+deleteItemGivenId(2, list)
+list.forEach(person => console.log(person))

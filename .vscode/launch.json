@@ -6,14 +6,14 @@
     "type": "node",
     "request": "launch",
     "name": "Ex1",
-    "program": "${workspaceRoot}/exercicio1.ts",
+    "program": "${workspaceRoot}/ex1/exercise1.ts",
     "outDir": "${workspaceRoot}/out"
   },
   {
     "type": "node",
     "request": "launch",
     "name": "Ex2",
-    "program": "${workspaceRoot}/exercicio2.ts",
+    "program": "${workspaceRoot}/ex2/exercise2.ts",
     "outDir": "${workspaceRoot}/out"
   }
 ],

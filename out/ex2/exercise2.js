@@ -19,4 +19,4 @@ console.log(searchForBioGivenId(2, list));
 console.log(searchForNameGivenId(2, list));
 deleteItemGivenId(2, list);
 list.forEach(person => console.log(person));
-//# sourceMappingURL=exercicio2.js.map
+//# sourceMappingURL=exercise2.js.map

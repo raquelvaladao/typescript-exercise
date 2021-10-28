@@ -35,3 +35,5 @@ console.log(searchForBioGivenId(2, list))
 console.log(searchForNameGivenId(2, list))
 deleteItemGivenId(2, list)
 list.forEach(person => console.log(person))
+
+//Demonstrate all functions with the functional paradigm and the imperative

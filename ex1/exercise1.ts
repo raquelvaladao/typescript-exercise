@@ -16,9 +16,6 @@ const form = document.querySelector('.form-id') as HTMLFormElement
 const word = document.getElementById('word') as HTMLInputElement
 form.addEventListener('submit', (e:Event) => {
     e.preventDefault()
-    console.log(word.value)
     console.log(returnQuantityOfVowels(word.value))
 })
-
-//TODO
 

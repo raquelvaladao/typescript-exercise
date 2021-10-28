@@ -1,5 +1,4 @@
 export{};
-
 //given the array:
 type Object = {
     id: number, 

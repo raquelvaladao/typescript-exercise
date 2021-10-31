@@ -1,4 +1,4 @@
-export{};
+
 //given the array:
 type People = {
     id: number,
@@ -32,7 +32,7 @@ function deleteItemGivenId(givenId: number, people: Array<People>): void {
 
 console.log(searchForBioGivenId(2, list));
 console.log(searchForNameGivenId(2, list));
-//deleteItemGivenId(2, list);
+deleteItemGivenId(2, list);
 list.forEach(person => console.log(person));
 
 

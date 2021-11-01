@@ -1,12 +1,12 @@
-export{};
+
 //given the array:
-type Object = {
-    id: number, 
-    name: string, 
+type People = {
+    id: number,
+    name: string,
     bio: string
 };
 
-const list: Array<Object> = Array(
+const list: Array<People> = Array(
     {"id" : 1, "name": "Ada Lovelace", "bio" : "Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina"},
     {"id" : 2, "name": "Alan Turing", "bio" : "Alan Turing foi um matemático, cientista da computação, lógico, criptoanalista, filósofo e biólogo teórico britânico, ele é amplamente considerado o pai da ciência da computação teórica e da inteligência artificia"},
     {"id" : 3, "name": "Nikola Tesla", "bio" : "Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada."},
@@ -14,6 +14,7 @@ const list: Array<Object> = Array(
 );
 
 //create a function that returns the bio given an id
+
 function searchForBioGivenId(givenId: number, people: Array<Object>): string {
     return people.filter(person => person.id === givenId)[0].bio     
 }
@@ -28,11 +29,74 @@ function deleteItemGivenId(givenId: number, people: Array<Object>): void {
     let personToDelete: Object = people.filter(person => person.id === givenId)[0]
     const index: number = people.indexOf(personToDelete)
     people.splice(index, 1)    
+=======
+function searchForBioGivenId(givenId: number, people: Array<People>): string {
+    return people.filter(person => person.id === givenId)[0].bio;    
 }
 
-console.log(searchForBioGivenId(2, list))
-console.log(searchForNameGivenId(2, list))
-deleteItemGivenId(2, list)
-list.forEach(person => console.log(person))
+//create a function that returns the name given an id
+function searchForNameGivenId(givenId: number, people: Array<People>): string {
+    return people.filter(person => person.id === givenId)[0].name;
+}
+
+//create a function that deletes item given an id
+function deleteItemGivenId(givenId: number, people: Array<People>): void {
+    let personToDelete: People = people.filter(person => person.id === givenId)[0];
+    const index: number = people.indexOf(personToDelete);
+    people.splice(index, 1);
+}
+
+console.log(searchForBioGivenId(2, list));
+console.log(searchForNameGivenId(2, list));
+deleteItemGivenId(2, list);
+list.forEach(person => console.log(person));
+
 
 //Demonstrate all functions with the functional paradigm and the imperative
+const searchForBioGivenIdFunc = (givenId: number, people: Array<People>): string => {
+    const filter: string = people.filter(person => person.id === givenId)[0].bio;
+    return filter;
+};
+
+const searchForNameGivenIdFunc = (givenId: number, people: Array<People>): string => {
+    const filter: string = people.filter(person => person.id === givenId)[0].name;
+    return filter;
+}
+
+const deleteItemGivenIdFunc = (givenId: number, people: Array<People>): Array<People> => {
+    const index: number = people.indexOf(people.filter(person => person.id === givenId)[0]);
+    people.splice(index, 1);
+    return people;
+}
+
+
+//Demonstrate all functions with the imperative paradigm
+function searchForBioGivenIdImp(givenId: number, people: Array<People>): string {
+    let bio: string = "";
+
+    for (let i = 0; i < people.length; i ++){
+        if(people[i].id === givenId){
+           bio = people[i].bio;
+        }
+    }
+    return bio;
+}
+
+function searchForNameGivenIdImp(givenId: number, people: Array<People>): string {
+    let name: string = "";
+
+    for (let i = 0; i < people.length; i ++){
+        if(people[i].id === givenId){
+           name = people[i].name;
+        }
+    }
+    return name;
+}
+
+function deleteItemGivenIdImp(givenId: number, people: Array<People>): void {
+    for (let i = 0; i < people.length; i ++){
+        if(people[i].id === givenId){
+            people.splice(givenId, 1);
+        }
+    }
+}

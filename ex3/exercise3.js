@@ -1,7 +1,7 @@
 function getValidList() {
     var input;
     var numbers = [];
-    input = window.prompt("It'll be executed until a not number appears");
+    input = window.prompt("It'll be executed until a non-number appears");
     while (!isNaN(input)) {
         numbers.push(+input);
         input = prompt();
@@ -22,12 +22,9 @@ function returnAverageValue(list) {
     return sum / list.length;
 }
 var validNumbers = getValidList();
-function output() {
-    console.log(returnGreatestValue(validNumbers));
-    console.log(returnSmallestValue(validNumbers));
-    console.log(returnAverageValue(validNumbers));
-}
-output();
+console.log(returnSmallestValue(validNumbers));
+console.log(returnGreatestValue(validNumbers));
+console.log(returnAverageValue(validNumbers));
 //Demonstrate all functions with the functional paradigm
 var returnGreatestValueFunc = function (list) {
     return Math.max.apply(null, list);
@@ -39,8 +36,6 @@ var sumAll = function (previousNumber, nextNumber) { return previousNumber + nex
 var returnAverageValueFunc = function (list) {
     return list.reduce(sumAll) / list.length;
 };
-console.log("media aqui");
-console.log(returnAverageValueFunc(validNumbers));
 //Demonstrate all functions with the imperative paradigm
 function returnGreatestValueImp(list) {
     var greatest = list[0];

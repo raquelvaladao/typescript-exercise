@@ -28,9 +28,14 @@ var searchForNameGivenIdFunc = function (givenId, people) {
 };
 var deleteItemGivenIdFunc = function (givenId, people) {
     var index = people.indexOf(people.filter(function (person) { return person.id === givenId; })[0]);
-    people.splice(index, 1);
-    return people;
+    return people.filter(function (person) { return person !== people[index]; });
 };
+console.log(searchForNameGivenIdFunc(3, list));
+console.log(searchForBioGivenIdFunc(3, list));
+console.log("A seguir, deve-se deletar 1 da lista anterior:");
+console.log(deleteItemGivenIdFunc(1, list));
+console.log("Deve continuar com 1 na lista (imut\u00E1vel):");
+console.log(list);
 //Demonstrate all functions with the imperative paradigm
 function searchForBioGivenIdImp(givenId, people) {
     var bio = "";
@@ -56,4 +61,8 @@ function deleteItemGivenIdImp(givenId, people) {
             people.splice(givenId, 1);
         }
     }
+    return people;
 }
+console.log(searchForNameGivenIdImp(3, list));
+console.log(searchForBioGivenIdImp(3, list));
+console.log(deleteItemGivenIdImp(3, list));

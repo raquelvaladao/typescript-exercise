@@ -27,15 +27,23 @@ console.log(returnGreatestValue(validNumbers));
 console.log(returnAverageValue(validNumbers));
 //Demonstrate all functions with the functional paradigm
 var returnGreatestValueFunc = function (list) {
-    return Math.max.apply(null, list);
+    return list.reduce(function (previousNumber, nextNumber) {
+        return previousNumber >= nextNumber ? previousNumber : nextNumber;
+    });
 };
 var returnSmallestValueFunc = function (list) {
-    return Math.max.apply(null, list);
+    return list.reduce(function (previousNumber, nextNumber) {
+        return previousNumber <= nextNumber ? previousNumber : nextNumber;
+    });
 };
 var sumAll = function (previousNumber, nextNumber) { return previousNumber + nextNumber; };
 var returnAverageValueFunc = function (list) {
     return list.reduce(sumAll) / list.length;
 };
+console.log("Functional:");
+console.log(returnSmallestValueFunc(validNumbers));
+console.log(returnGreatestValueFunc(validNumbers));
+console.log(returnAverageValueFunc(validNumbers));
 //Demonstrate all functions with the imperative paradigm
 function returnGreatestValueImp(list) {
     var greatest = list[0];
@@ -64,3 +72,7 @@ function returnAverageValueImp(list) {
     average = sum / list.length;
     return average;
 }
+console.log("Imperative:");
+console.log(returnSmallestValueImp(validNumbers));
+console.log(returnGreatestValueImp(validNumbers));
+console.log(returnAverageValueImp(validNumbers));

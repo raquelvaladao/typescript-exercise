@@ -63,6 +63,7 @@ function deleteItemGivenIdImp(givenId, people) {
     }
     return people;
 }
+console.log("Imperativo:");
 console.log(searchForNameGivenIdImp(3, list));
 console.log(searchForBioGivenIdImp(3, list));
 console.log(deleteItemGivenIdImp(3, list));

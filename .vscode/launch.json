@@ -7,14 +7,14 @@
     "request": "launch",
     "name": "Ex1",
     "program": "${workspaceRoot}/ex1/exercise1.ts",
-    "outDir": "${workspaceRoot}/out"
+    "outDir": "${workspaceRoot}"
   },
   {
     "type": "node",
     "request": "launch",
     "name": "Ex2",
     "program": "${workspaceRoot}/ex2/exercise2.ts",
-    "outDir": "${workspaceRoot}/out"
+    "outDir": "${workspaceRoot}"
   }
 ],
 "compounds": [

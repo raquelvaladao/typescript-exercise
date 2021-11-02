@@ -65,9 +65,15 @@ const searchForNameGivenIdFunc = (givenId: number, people: Array<People>): strin
 
 const deleteItemGivenIdFunc = (givenId: number, people: Array<People>): Array<People> => {
     const index: number = people.indexOf(people.filter(person => person.id === givenId)[0]);
-    people.splice(index, 1);
-    return people;
+    return people.filter(person => person !== people[index]);
 }
+
+console.log(searchForNameGivenIdFunc(3, list));
+console.log(searchForBioGivenIdFunc(3, list));
+console.log(`A seguir, deve-se deletar 1 da lista anterior:`);
+console.log(deleteItemGivenIdFunc(1, list));
+console.log(`Deve continuar com 1 na lista (imutável):`);
+console.log(list);
 
 
 //Demonstrate all functions with the imperative paradigm
@@ -93,10 +99,16 @@ function searchForNameGivenIdImp(givenId: number, people: Array<People>): string
     return name;
 }
 
-function deleteItemGivenIdImp(givenId: number, people: Array<People>): void {
+function deleteItemGivenIdImp(givenId: number, people: Array<People>): Array<People> {
     for (let i = 0; i < people.length; i ++){
         if(people[i].id === givenId){
             people.splice(givenId, 1);
         }
     }
+    return people;
 }
+
+console.log(`Imperativo:`);
+console.log(searchForNameGivenIdImp(3,list));
+console.log(searchForBioGivenIdImp(3,list));
+console.log(deleteItemGivenIdImp(3, list));

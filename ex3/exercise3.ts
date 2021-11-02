@@ -34,17 +34,27 @@ console.log(returnAverageValue(validNumbers));
 
 //Demonstrate all functions with the functional paradigm
 const returnGreatestValueFunc = (list: number[]): number => {
-    return Math.max.apply(null, list);
-};
+    return list.reduce((previousNumber: number, nextNumber: number): number => {
+        return previousNumber >= nextNumber ? previousNumber : nextNumber;
+    });
+}
 
-const returnSmallestValueFunc = (list: number[]): number => {
-    return Math.max.apply(null, list);
-};
+const returnSmallestValueFunc = (list: number[]): number => { 
+    return list.reduce((previousNumber: number, nextNumber: number): number => {
+        return previousNumber <= nextNumber ? previousNumber : nextNumber;
+    });
+}
 
 const sumAll = (previousNumber: number, nextNumber: number): number => previousNumber + nextNumber;
 const returnAverageValueFunc = (list: number[]): number => {
    return list.reduce(sumAll) / list.length;
-};
+}
+
+console.log("Functional:");
+console.log(returnSmallestValueFunc(validNumbers));
+console.log(returnGreatestValueFunc(validNumbers));
+console.log(returnAverageValueFunc(validNumbers));
+
 
 //Demonstrate all functions with the imperative paradigm
 function returnGreatestValueImp(list: number[]): number {
@@ -79,3 +89,8 @@ function returnAverageValueImp(list: number[]): number {
     average = sum / list.length;
     return average;
 }
+
+console.log("Imperative:");
+console.log(returnSmallestValueImp(validNumbers));
+console.log(returnGreatestValueImp(validNumbers));
+console.log(returnAverageValueImp(validNumbers));

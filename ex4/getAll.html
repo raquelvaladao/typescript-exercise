@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">   
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>People table</h1>
+    <form action="" class="create-form">
+        <fieldset>
+            <legend>Add a new person</legend>
+            
+            <label for="name-form">Id:</label><br>
+            <input type="number" id="id-form" value="1" disabled>
+            <br><span>*this is automatically incremented</span>
+            <br><br>
+
+            <label for="name-form">Name:</label><br>
+            <input type="text" minlength="3" id="name-form" required>
+            <br><br>
+
+            <label for="bio-form">Bio:</label><br>
+            <input type="text" minlength="5" id="bio-form" required>
+            <br><br>
+            <button id="insert-btn" type="submit">Insert new</button>
+        </fieldset>
+    </form>
+
+    <div class="tablecontainer">
+    <table id="people-table">
+        
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Bio</th>
+            </tr>
+        </thead>   
+
+        <tbody>
+            <tr>
+                <td id="id-row">1</td>
+                <td id="name-row">Maria Anders</td>
+                <td id="bio-row">Descrição da bio de Maria</td>
+                <td>
+                    <button id="update-btn">Update</button>
+                </td>
+                <td>
+                    <button id="delete-btn">Delete</button>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Ada Lovelace</td>
+                <td>Descrição da bio de Ada.</td>
+                <td>
+                    <button id="update-btn">Update</button>
+                </td>
+                <td>
+                    <button id="delete-btn">Delete</button>
+                </td>
+            </tr>
+
+            <tr>
+                <td>3</td>
+                <td>Tesla</td>
+                <td>Descrição da bio de Tesla.</td>
+                <td>
+                    <button id="update-btn">Update</button>
+                </td>
+                <td>
+                    <button id="delete-btn">Delete</button>
+                </td>
+            </tr>
+
+            <tr>
+                <td>4</td>
+                <td>Isaac Newton</td>
+                <td>Descrição da bio de Newton.</td>
+                <td>
+                    <button id="update-btn">Update</button>
+                </td>
+                <td>
+                    <button id="delete-btn">Delete</button>
+                </td>
+            </tr>
+        </tbody>      
+    </table>
+    </div>
+    
+</body>
+<script src="exercise4.js"></script>
+</html>

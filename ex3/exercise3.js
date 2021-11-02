@@ -1,7 +1,7 @@
 function getValidList() {
     var input;
     var numbers = [];
-    input = window.prompt("It'll be executed until a not number appears");
+    input = window.prompt("It'll be executed until a non-number appears");
     while (!isNaN(input)) {
         numbers.push(+input);
         input = prompt();
@@ -22,24 +22,27 @@ function returnAverageValue(list) {
     return sum / list.length;
 }
 var validNumbers = getValidList();
-function output() {
-    console.log(returnGreatestValue(validNumbers));
-    console.log(returnSmallestValue(validNumbers));
-    console.log(returnAverageValue(validNumbers));
-}
-output();
+console.log(returnSmallestValue(validNumbers));
+console.log(returnGreatestValue(validNumbers));
+console.log(returnAverageValue(validNumbers));
 //Demonstrate all functions with the functional paradigm
 var returnGreatestValueFunc = function (list) {
-    return Math.max.apply(null, list);
+    return list.reduce(function (previousNumber, nextNumber) {
+        return previousNumber >= nextNumber ? previousNumber : nextNumber;
+    });
 };
 var returnSmallestValueFunc = function (list) {
-    return Math.max.apply(null, list);
+    return list.reduce(function (previousNumber, nextNumber) {
+        return previousNumber <= nextNumber ? previousNumber : nextNumber;
+    });
 };
 var sumAll = function (previousNumber, nextNumber) { return previousNumber + nextNumber; };
 var returnAverageValueFunc = function (list) {
     return list.reduce(sumAll) / list.length;
 };
-console.log("media aqui");
+console.log("Functional:");
+console.log(returnSmallestValueFunc(validNumbers));
+console.log(returnGreatestValueFunc(validNumbers));
 console.log(returnAverageValueFunc(validNumbers));
 //Demonstrate all functions with the imperative paradigm
 function returnGreatestValueImp(list) {
@@ -69,3 +72,7 @@ function returnAverageValueImp(list) {
     average = sum / list.length;
     return average;
 }
+console.log("Imperative:");
+console.log(returnSmallestValueImp(validNumbers));
+console.log(returnGreatestValueImp(validNumbers));
+console.log(returnAverageValueImp(validNumbers));

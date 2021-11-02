@@ -15,12 +15,19 @@
     "name": "Ex2",
     "program": "${workspaceRoot}/ex2/exercise2.ts",
     "outDir": "${workspaceRoot}"
+  },
+  {
+    "type": "node",
+    "request": "launch",
+    "name": "Ex4",
+    "program": "${workspaceRoot}/ex4/exercise4.ts",
+    "outDir": "${workspaceRoot}/ex4/js"
   }
 ],
 "compounds": [
   {
     "name": "Ex1/Ex2",
-    "configurations": ["Ex1", "Ex2"],
+    "configurations": ["Ex1", "Ex2", "Ex4"],
     
   }
 ]

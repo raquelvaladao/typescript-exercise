@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercise 3</title>
+    <title>Exercise 4</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">   
@@ -17,42 +17,46 @@
             <legend>Add a new person</legend>
             
             <label for="name-form">Id:</label><br>
-            <input type="number" id="id-form" value="1" disabled>
-            <br><span>*this is automatically incremented</span>
-            <br><br>
+            <input type="number" id="id-form" placeholder="1" tabindex="-1">
+            <br>
 
             <label for="name-form">Name:</label><br>
-            <input type="text" minlength="3" id="name-form" required>
-            <br><br>
+            <input type="text" minlength="3" id="name-form" tabindex="-1" required>
+            <br>
 
             <label for="bio-form">Bio:</label><br>
-            <input type="text" minlength="5" id="bio-form" required>
+            <input type="text" minlength="5" id="bio-form" tabindex="-1" required>
             <br><br>
-            <button id="insert-btn" type="submit">Insert new</button>
+            <div id="insert-or-update">
+                <button id="insert-btn" type="submit">Insert new</button>
+            </div>        
         </fieldset>
     </form>
+
 
     <div class="tablecontainer">
     <table id="people-table">
         
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Bio</th>
+                <th id="id-col">ID</th>
+                <th id="name-col">Name</th>
+                <th id="bio-col">Bio</th>
+                <th id="update-col"></th>
+                <th id="delete-col"></th>
             </tr>
         </thead>   
 
         <tbody>
             <tr>
-                <td id="id-row">1</td>
-                <td id="name-row">Maria Anders</td>
-                <td id="bio-row">Descrição da bio de Maria</td>
+                <td >1</td>
+                <td >Maria Anders</td>
+                <td >Descrição da bio de Maria</td>
                 <td>
-                    <button id="update-btn">Update</button>
+                    <button class="update-btn" id="update-btn">Update</button>
                 </td>
                 <td>
-                    <button id="delete-btn">Delete</button>
+                    <button class="delete-btn" id="delete-btn">Delete</button>
                 </td>
             </tr>
             <tr>
@@ -60,10 +64,10 @@
                 <td>Ada Lovelace</td>
                 <td>Descrição da bio de Ada.</td>
                 <td>
-                    <button id="update-btn">Update</button>
+                    <button class="update-btn" id="update-btn">Update</button>
                 </td>
                 <td>
-                    <button id="delete-btn">Delete</button>
+                    <button class="delete-btn" id="delete-btn">Delete</button>
                 </td>
             </tr>
 
@@ -72,10 +76,10 @@
                 <td>Tesla</td>
                 <td>Descrição da bio de Tesla.</td>
                 <td>
-                    <button id="update-btn">Update</button>
+                    <button class="update-btn" id="update-btn">Update</button>
                 </td>
                 <td>
-                    <button id="delete-btn">Delete</button>
+                    <button class="delete-btn" id="delete-btn">Delete</button>
                 </td>
             </tr>
 
@@ -84,10 +88,10 @@
                 <td>Isaac Newton</td>
                 <td>Descrição da bio de Newton.</td>
                 <td>
-                    <button id="update-btn">Update</button>
+                    <button class="update-btn" id="update-btn">Update</button>
                 </td>
                 <td>
-                    <button id="delete-btn">Delete</button>
+                    <button class="delete-btn" id="delete-btn">Delete</button>
                 </td>
             </tr>
         </tbody>      

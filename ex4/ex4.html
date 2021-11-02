@@ -12,24 +12,22 @@
 </head>
 <body>
     <h1>People table</h1>
-    <form action="" class="create-form">
+    <form action="" id="update-form">
         <fieldset>
             <legend>Add a new person</legend>
             
             <label for="name-form">Id:</label><br>
-            <input type="number" id="id-form" placeholder="1" tabindex="-1">
+            <input type="number" id="id-form" placeholder="1" required>
             <br>
 
             <label for="name-form">Name:</label><br>
-            <input type="text" minlength="3" id="name-form" tabindex="-1" required>
+            <input type="text" minlength="3" id="name-form" required>
             <br>
 
             <label for="bio-form">Bio:</label><br>
-            <input type="text" minlength="5" id="bio-form" tabindex="-1" required>
+            <input type="text" id="bio-form" required>
             <br><br>
-            <div id="insert-or-update">
-                <button id="insert-btn" type="submit">Insert new</button>
-            </div>        
+            <button id="update-form-btn">Update</button>
         </fieldset>
     </form>
 
@@ -39,65 +37,20 @@
         
         <thead>
             <tr>
-                <th id="id-col">ID</th>
-                <th id="name-col">Name</th>
-                <th id="bio-col">Bio</th>
-                <th id="update-col"></th>
-                <th id="delete-col"></th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Bio</th>
+                <th id="update-column"></th>
+                <th id="delete-column"></th>
             </tr>
         </thead>   
 
         <tbody>
-            <tr>
-                <td >1</td>
-                <td >Maria Anders</td>
-                <td >Descrição da bio de Maria</td>
-                <td>
-                    <button class="update-btn" id="update-btn">Update</button>
-                </td>
-                <td>
-                    <button class="delete-btn" id="delete-btn">Delete</button>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Ada Lovelace</td>
-                <td>Descrição da bio de Ada.</td>
-                <td>
-                    <button class="update-btn" id="update-btn">Update</button>
-                </td>
-                <td>
-                    <button class="delete-btn" id="delete-btn">Delete</button>
-                </td>
-            </tr>
-
-            <tr>
-                <td>3</td>
-                <td>Tesla</td>
-                <td>Descrição da bio de Tesla.</td>
-                <td>
-                    <button class="update-btn" id="update-btn">Update</button>
-                </td>
-                <td>
-                    <button class="delete-btn" id="delete-btn">Delete</button>
-                </td>
-            </tr>
-
-            <tr>
-                <td>4</td>
-                <td>Isaac Newton</td>
-                <td>Descrição da bio de Newton.</td>
-                <td>
-                    <button class="update-btn" id="update-btn">Update</button>
-                </td>
-                <td>
-                    <button class="delete-btn" id="delete-btn">Delete</button>
-                </td>
-            </tr>
+            
         </tbody>      
     </table>
+
     </div>
-    
 </body>
 <script src="exercise4.js"></script>
 </html>

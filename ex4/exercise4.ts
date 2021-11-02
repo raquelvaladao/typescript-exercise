@@ -1,36 +1,56 @@
 //given the array from exercise 2
-const submit: HTMLElement = document.getElementById('insert-btn');
+
+type Person = {
+    id: string;
+    name: string;
+    bio: string;
+}
+type Input = {
+    idInput: HTMLInputElement;
+    nameInput: HTMLInputElement;
+    bioInput: HTMLInputElement;
+}
+type CellsCollection = HTMLCollectionOf<HTMLTableCellElement>;
+
+let people: Array<Person> = Array(
+    {id : "1", name: "Ada Lovelace", bio : "Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina"},
+    {id : "2", name: "Alan Turing", bio : "Alan Turing foi um matemático, cientista da computação, lógico, criptoanalista, filósofo e biólogo teórico britânico, ele é amplamente considerado o pai da ciência da computação teórica e da inteligência artificia"},
+    {id : "3", name: "Nikola Tesla", bio : "Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada."},
+    {id : "4", name: "Nicolau Copérnico", bio: "Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar."}
+);
+const updateFormButton: HTMLButtonElement = document.getElementById('update-form-btn') as HTMLButtonElement;
 const table: HTMLTableElement = document.getElementById('people-table') as HTMLTableElement;
 
-submit.addEventListener('click', (event:Event) => {
-    let givenId: number = parseInt((<HTMLInputElement>document.getElementById('id-form')).value);
-    
-    event.preventDefault();
-    if(checkIfFieldsAreEmpty()) {
-        if(checkIfIdExists(givenId)){
-            insertIntoTable();
-        }
-    }
-});
+setSingleButtonAvailability(updateFormButton, false);
 table.addEventListener('click', deleteRow);
 table.addEventListener('click', getUpdateButtonRow);
+sendArrayToTable(people);
 
-function checkIfFieldsAreEmpty(): boolean {
-    let idInput: string = (<HTMLInputElement>document.getElementById('id-form')).value;
-    let nameInput: string = (<HTMLInputElement>document.getElementById('name-form')).value;
-    let bioInput: string = (<HTMLInputElement>document.getElementById('bio-form')).value;
-    if(!idInput || !nameInput || !bioInput){
+function setSingleButtonAvailability(button: HTMLButtonElement, isEnabled: boolean) {
+    if(isEnabled === false){
+        button.style.background = '#2e2c2c';
+        button.disabled = true;
+    } else {
+        button.style.background = '#006eff';
+        button.disabled = false;
+    }
+}
+
+function checkIfFieldsAreEmpty(inputs: Input): boolean {
+    if(!inputs.idInput.value || !inputs.nameInput.value || !inputs.bioInput.value){
         alert("Please fill all the fields");
         return false;
     }
     return true;
 }
 
-function checkIfIdExists(givenId: number): boolean {
+function checkIfIdExists(givenId: string, oldId: string): boolean {
+    const ID: number = 0;
     const table: HTMLTableElement = document.getElementById('people-table') as HTMLTableElement;
    
     for(let i = 0; i < table.rows.length; i++){        
-        if(table.rows[i].cells[0].innerHTML == String(givenId)){
+        const cellId = table.rows[i].cells[ID].innerHTML;
+        if(cellId === givenId && cellId !== oldId){
             alert("Avoid repeated ID");
             return false;
         }
@@ -38,31 +58,23 @@ function checkIfIdExists(givenId: number): boolean {
     return true;
 }
 
-function insertIntoTable(): void {
+function deleteRow(event: any): void {
+    if (!event.target.classList.contains("delete-btn")) {
+      return;
+    }
+    const button: any = event.target;
+    button.closest('tr').remove();
+}
+function sendArrayToTable(people: Array<Person>): void {
     const table: HTMLTableElement = document.getElementById('people-table') as HTMLTableElement;
-    const row: HTMLTableRowElement = table.insertRow();
-    
-    insertInputsIntoRow(row);
-    insertButtonsIntoRow(row);
-    alert("Person successfully added!");
-}
+    const form: HTMLFormElement = document.getElementById('update-form') as HTMLFormElement;
 
-function insertInputsIntoRow(row: HTMLTableRowElement): void {
-    const ID_CELL: number = 0, NAME_CELL: number = 1, BIO_CELL: number = 2;
-    let idInput: HTMLInputElement = (document.getElementById('id-form') as HTMLInputElement);
-    let nameInput: HTMLInputElement = (document.getElementById('name-form') as HTMLInputElement);
-    let bioInput: HTMLInputElement = (document.getElementById('bio-form') as HTMLInputElement);
-
-    row.insertCell(ID_CELL).innerHTML = idInput.value;
-    row.insertCell(NAME_CELL).innerHTML = nameInput.value;
-    row.insertCell(BIO_CELL).innerHTML = bioInput.value;
-    clearInputFields(idInput, nameInput, bioInput);
-}
-
-function clearInputFields(id: HTMLInputElement, name: HTMLInputElement, bio: HTMLInputElement) {
-    id.value = "";
-    name.value = "";
-    bio.value = "";
+    people.forEach(person => {
+        const row: HTMLTableRowElement = table.insertRow();
+        insertInputsIntoRow(row, person);
+        insertButtonsIntoRow(row);
+    });
+    form.reset();
 }
 
 function insertButtonsIntoRow(row: HTMLTableRowElement): void {
@@ -76,12 +88,18 @@ function insertButtonsIntoRow(row: HTMLTableRowElement): void {
     row.insertCell(DELETE_BTN_CELL).appendChild(newDeleteBtn);
 }
 
-function deleteRow(event: any): void {
-    if (!event.target.classList.contains("delete-btn")) {
-      return;
-    }
-    const button: any = event.target;
-    button.closest('tr').remove();
+function populateButton(updateBtn: HTMLElement, id: string, name: string, className: string): void {
+    updateBtn.setAttribute('id', id);
+    updateBtn.setAttribute('class', className);
+    updateBtn.innerHTML = name;
+}
+
+function insertInputsIntoRow(row: HTMLTableRowElement, person: Person): void {
+    const ID: number = 0, NAME: number = 1, BIO: number = 2;
+    
+    row.insertCell(ID).innerHTML = person.id;
+    row.insertCell(NAME).innerHTML = person.name;
+    row.insertCell(BIO).innerHTML = person.bio;
 }
 
 function getUpdateButtonRow(event: any): void {
@@ -92,46 +110,52 @@ function getUpdateButtonRow(event: any): void {
     updateTableRow(rowIndex);    
 }
 
-function updateTableRow(index: number): void {
-    const ID: number = 0, NAME: number = 1, BIO: number = 2;
-    let idInput: HTMLInputElement = (document.getElementById('id-form') as HTMLInputElement);
-    let nameInput: HTMLInputElement = (document.getElementById('name-form') as HTMLInputElement);
-    let bioInput: HTMLInputElement = (document.getElementById('bio-form') as HTMLInputElement);
-    let cell: HTMLCollectionOf<HTMLTableCellElement> = table.rows[index].cells;
+function updateTableRow(updateIndex: number): void {
+    const cells: CellsCollection = table.rows[updateIndex].cells;
+    const form: HTMLFormElement = document.getElementById('update-form') as HTMLFormElement;
+    const updateButton: HTMLButtonElement = document.getElementById('update-form-btn') as HTMLButtonElement;
+    const inputs: Input = getInputsFromForm();
     
-    const insertFormButton: HTMLElement = document.getElementById('insert-btn');
-    const divToAppendButton: HTMLDivElement = <HTMLDivElement>document.getElementById('insert-or-update');
-    const allDeleteButtons: HTMLCollectionOf<Element> = document.getElementsByClassName("delete-btn");
-    const allUpdateButtons: HTMLCollectionOf<Element> = document.getElementsByClassName("update-btn");
-    let newUpdateButton: HTMLElement = document.createElement('button') as HTMLButtonElement;
-
-    populateButton(newUpdateButton, "update-btn", "Update", "update-form-class");
-    idInput.value = cell[ID].innerHTML;
-    nameInput.value = cell[NAME].innerHTML;
-    bioInput.value = cell[BIO].innerHTML;
-    insertFormButton.remove();
-    setButtonsAvailability(allDeleteButtons, allUpdateButtons, true);
-    divToAppendButton.appendChild(newUpdateButton);
-    newUpdateButton.onclick = function () {
-        if(checkIfIdExists(parseInt(idInput.value))){      
-            cell[ID].innerHTML = idInput.value;
-            cell[NAME].innerHTML = nameInput.value;
-            cell[BIO].innerHTML = bioInput.value;
-            clearInputFields(idInput, nameInput, bioInput);
-            newUpdateButton.remove();
-            divToAppendButton.appendChild(insertFormButton);
-            setButtonsAvailability(allDeleteButtons, allUpdateButtons, false);
+    setButtonsAvailability(true);
+    setSingleButtonAvailability(updateButton, true);
+    setTableValuesIntoForm(inputs, cells);
+    updateButton.onclick = function(e: Event) {
+        e.preventDefault();
+        if(checkIfFieldsAreEmpty(inputs) && checkIfIdExists(inputs.idInput.value, cells[0].innerHTML)){      
+            setFormValuesIntoTable(cells, inputs);
+            setButtonsAvailability(false);
+            setSingleButtonAvailability(updateButton, false);
+            form.reset();
         }
-    }
+    };
 }
 
-function populateButton(updateBtn: HTMLElement, id: string, name: string, className: string): void {
-    updateBtn.setAttribute('id', id);
-    updateBtn.setAttribute('class', className);
-    updateBtn.innerHTML = name;
+function setFormValuesIntoTable(cell: CellsCollection, inputs: Input) {
+    const ID: number = 0, NAME: number = 1, BIO: number = 2;
+
+    cell[ID].innerHTML = inputs.idInput.value;
+    cell[NAME].innerHTML = inputs.nameInput.value;
+    cell[BIO].innerHTML = inputs.bioInput.value;
 }
 
-function setButtonsAvailability(btnGroupA: HTMLCollectionOf<Element>, btnGroupB:HTMLCollectionOf<Element>, key: boolean): void {
+function setTableValuesIntoForm(inputs: Input, cell: CellsCollection) {
+    inputs.idInput.value = cell[0].innerHTML;
+    inputs.nameInput.value = cell[1].innerHTML;
+    inputs.bioInput.value = cell[2].innerHTML;
+}
+
+function getInputsFromForm(): Input {
+    return {
+        idInput: <HTMLInputElement>document.getElementById('id-form'),
+        nameInput: <HTMLInputElement>document.getElementById('name-form'),
+        bioInput: <HTMLInputElement>document.getElementById('bio-form')
+    };
+}
+
+function setButtonsAvailability(key: boolean): void {
+    let btnGroupA: HTMLCollectionOf<Element> = document.getElementsByClassName("delete-btn");
+    let btnGroupB: HTMLCollectionOf<Element> = document.getElementsByClassName("update-btn");
+    
     for (let i in btnGroupA) {
         if(key == true){
             (<HTMLButtonElement>btnGroupA[i]).disabled = true;

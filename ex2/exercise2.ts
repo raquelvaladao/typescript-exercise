@@ -15,23 +15,8 @@ const list: Array<People> = Array(
 
 //create a function that returns the bio given an id
 
-function searchForBioGivenId(givenId: number, people: Array<Object>): string {
-    return people.filter(person => person.id === givenId)[0].bio     
-}
-
-//create a function that returns the name given an id
-function searchForNameGivenId(givenId: number, people: Array<Object>): string {
-    return people.filter(person => person.id === givenId)[0].name
-}
-
-//create a function that deletes item given an id
-function deleteItemGivenId(givenId: number, people: Array<Object>): void {
-    let personToDelete: Object = people.filter(person => person.id === givenId)[0]
-    const index: number = people.indexOf(personToDelete)
-    people.splice(index, 1)    
-=======
 function searchForBioGivenId(givenId: number, people: Array<People>): string {
-    return people.filter(person => person.id === givenId)[0].bio;    
+    return people.filter(person => person.id === givenId)[0].bio  ;   
 }
 
 //create a function that returns the name given an id
@@ -56,7 +41,7 @@ list.forEach(person => console.log(person));
 const searchForBioGivenIdFunc = (givenId: number, people: Array<People>): string => {
     const filter: string = people.filter(person => person.id === givenId)[0].bio;
     return filter;
-};
+}
 
 const searchForNameGivenIdFunc = (givenId: number, people: Array<People>): string => {
     const filter: string = people.filter(person => person.id === givenId)[0].name;
